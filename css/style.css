@@ -1,0 +1,382 @@
+/* CSS */
+
+html {
+	background: white;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+}
+.container {
+	left: 0;
+	width: 100%;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(245, 245, 245)));
+	background-image:      -o-linear-gradient(bottom, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+	background-image:    -moz-linear-gradient(bottom, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+	background-image:     -ms-linear-gradient(bottom, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+	background-image:         linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+	border-bottom: 1px solid rgb(230,230,230);
+}
+.social-header {
+	width: 100%;
+	height: 40px;
+	background-color: rgb(50,50,50); 
+}
+header {
+	position: absolute;
+	background: rgba(255,255,255,.9);
+	width: 100%;
+	height: 80px;
+	border-bottom: 1px solid rgb(240,240,240);
+	z-index: 9999;
+}
+.header-container {
+	position: relative;
+	left: 15%;
+	width: 70%;
+}
+.logo {
+	position: absolute;
+	top: 20px;
+	width: 220px;
+	text-transform: uppercase;
+	font-size: 30px;
+	text-indent: -9999px;
+	background: url(../assets/images/logo.png) no-repeat;
+	cursor: pointer;
+}
+nav {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	list-style-type: none;
+}
+li {
+	display: inline-block;
+	margin: 0 20px;
+}
+li a {
+	text-transform: uppercase;
+	color: rgb(100,100,100);
+	text-shadow: 1px 1px 1px rgba(100,100,100,.2);
+	transition: all 0.8s;
+}
+li:hover a {
+	text-decoration: none;
+	color: rgb(0,0,0);
+	color: #f47920;
+}
+#about-me {
+	position: relative;
+	top: -80px;
+	width: 100%;
+	height: 320px;
+	background: rgb(255,255,255) url(../assets/images/about-me.jpg) center center no-repeat;
+	-webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+#about-me-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.about-me-banner {
+	position: absolute;
+	bottom: -100px;
+	width: 100%;
+	height: 100px;
+	background: rgba(255,255,255,.5);
+	font-size: 30px;
+	text-align: center;
+	padding-top: 25px;
+	color: rgb(100,100,100);
+	text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.4);
+	border-top: 1px solid rgb(200,200,200);
+}
+#description {
+	position: relative;
+	height: 360px;
+}
+#description p {
+	position: relative;
+	left: 10%;
+	width: 54%;
+	margin-top: -15px;
+	font-size: 25px;
+	line-height: 50px;
+	text-shadow: 0px 2px 2px rgba(200,200,200,.4);
+	color: rgb(100,100,100);
+}
+#description .profile-image {
+	position: absolute;
+	top: 10px;
+	right: 10%;
+	width: 280px;
+	border: 5px solid rgb(255,255,255);
+	border-radius: 140px;
+	box-shadow: rgb(222, 224, 223) 0px 0px 2px 1px;
+}
+#competencies {
+	min-height: 550px;
+}
+#competencies section {
+	position: absolute;
+	width: 38%;
+	min-height: 500px;
+	text-align: center;
+}
+.i-am {
+	left: 10%;
+}
+.i-am-not {
+	right: 10%;
+}
+#competencies h3 {
+	padding-top: 10px;
+	font: italic normal 100px "adelle", serif;
+	letter-spacing: -8px;
+	text-transform: lowercase;
+	text-shadow: 0px 2px 2px rgba(100,100,100,.4);
+	color: rgb(100,100,100);
+}
+#competencies h3 span {
+	position: absolute;
+	top: 76px;
+	right: 136px;
+	color: red;
+	font-size: 50px;
+	font-weight: 500;
+	letter-spacing: -3px;
+	-webkit-transform: translate3d(0,0,0);
+	   -moz-transform: translate3d(0,0,0);
+	     -o-transform: translate3d(0,0,0);
+			    transform: translate3d(0,0,0);
+}
+#competencies p {
+	display: inline;
+	padding: 10px;
+	font-size: 18px;
+	line-height: 50px;
+}
+#competencies p:nth-child(even) {
+	font: 300 22px/50px Helvetica;
+}
+#competencies p:nth-child(3n+3) {
+	font: italic 20px/50px "adelle", serif;
+}
+#skills {
+	position: relative;
+	height: 700px;
+	padding: 0;
+	background: rgb(247,247,247) url(../assets/images/skills-bg.png) center center no-repeat;
+	-webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  overflow: hidden;
+}
+#skills > h1 {
+	position: relative;
+	width: 100%;
+	height: 100px;
+	margin: 0;
+	padding-top: 30px;
+	text-align: center;
+	font-size: 34px;
+	font-weight: 100;
+	text-shadow: 0px 2px 2px rgba(255,255,255,.4);
+	background: rgb(255,255,255);
+	color: rgb(120,120,120);
+	-webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+	   -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+	     -o-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+	        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+	z-index: 99;
+}
+#portfolio-header {
+	position: relative;
+	height: 100px;
+	padding-top: 24px;
+	font-size: 34px;
+	font-weight: 100;
+	text-align: center;
+	background: rgb(94,172,215);
+	color: rgb(255,255,255);
+}
+#portfolio-header.small-triangle:after {
+	top: 99px;
+	border-top-color: rgb(94,172,215);
+}
+#portfolio {
+	position: relative;
+	height: 730px;
+}
+#portfolio img {
+	position: absolute;
+	padding: 5px;
+	border: 8px solid rgb(255,255,255);
+	border-radius: 4px;
+}
+#portfolio img:nth-child(1) {
+	top: 40px;
+	left: 10%;
+}
+#portfolio img:nth-child(2) {
+	top: 40px;
+	right: 10%;
+}
+#portfolio img:nth-child(3) {
+	top: 380px;
+	left: 10%;
+}
+#portfolio img:nth-child(4) {
+	top: 380px;
+	right: 10%;
+}
+#another-section {
+	height: 400px;
+}
+footer {
+	height: 130px;
+	background: rgb(50,50,50);
+}
+
+
+.front-end, .back-end {
+	position: absolute;
+	top: 125px;
+	width: 580px;
+	height: 580px;
+	/*border: 5px solid rgba(240,240,240,.1);*/
+	/*border-radius: 350px;*/
+	/*background: rgba(245,245,245,.9);*/
+}
+.front-end {
+	left: 9%;
+}
+.back-end {
+	right: 9%;
+}
+.front-end img,
+.back-end img {
+	position: absolute;
+	top: 140px;
+	left: 100px;
+	width: 60%;
+	z-index: 999;
+}
+.back-end img {
+	right: 80px;
+}
+
+.skill {
+	position: absolute;
+	width: 130px;
+	height: 130px;
+	border: 5px solid rgb(240,240,240);
+	border-radius: 65px;
+	background: rgb(220,220,220);
+}
+.circle-container {
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	width: 70%;
+  height:0;
+  padding-bottom: 70%;
+  border-radius: 50%;
+  background: rgb(200,200,200); 
+}
+.skill h3 {
+	position: relative;
+	top: -17px;
+	height: 80px !important;
+	font-size: 12px;
+	color: rgb(100,100,100);
+}
+.circle {
+	position: absolute;
+	top: -webkit-calc(50% - 35px) !important;
+	top:    -moz-calc(50% - 35px) !important;
+	top:      -o-calc(50% - 35px) !important;
+	top:         calc(50% - 35px) !important;
+	left: -webkit-calc(50% - 35px);
+	left:    -moz-calc(50% - 35px);
+	left:      -o-calc(50% - 35px);
+	left:         calc(50% - 35px);
+	top: 10px;
+}
+
+
+.circles-text-wrp,
+.circles-number {
+	display: none;
+}
+.circles-text {
+	font-size: 10px;
+	display: none;
+}
+.shadow {
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+	   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+	     -o-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+	        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.bottom-shadow {
+	-webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.75);
+		 -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.75);
+		   -o-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.75);
+					box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.75);
+}
+.triangle:before,
+.triangle:after,
+.small-triangle:before,
+.small-triangle:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom: 0;
+}
+.triangle:before {
+  bottom: -30px;
+  left: -webkit-calc(50% - 30px);
+  left:    -moz-calc(50% - 30px);
+  left:      -o-calc(50% - 30px);
+  left:         calc(50% - 30px);
+  border-top-color: rgb(230,230,230);
+  border-width: 30px;
+}
+.small-triangle:before {
+	bottom: -15px;
+  left: -webkit-calc(50% - 15px);
+  left:    -moz-calc(50% - 15px);
+  left:      -o-calc(50% - 15px);
+  left:         calc(50% - 15px);
+  border-top-color: rgb(230,230,230);
+  border-width: 15px;
+}
+.triangle:after {
+  bottom: -29px;
+  left: -webkit-calc(50% - 29px);
+  left:    -moz-calc(50% - 29px);
+  left:      -o-calc(50% - 29px);
+  left:         calc(50% - 29px);
+  border-top-color: rgb(245,245,245);
+  border-width: 29px;
+  z-index: 999;
+}
+.small-triangle:after {
+	bottom: -14px;
+  left: -webkit-calc(50% - 14px);
+  left:    -moz-calc(50% - 14px);
+  left:      -o-calc(50% - 14px);
+  left:         calc(50% - 14px);
+  border-top-color: rgb(245,245,245);
+  border-width: 14px;
+  z-index: 999;
+}
