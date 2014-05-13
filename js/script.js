@@ -1,8 +1,77 @@
 // Javascript
 
+var iAm = [
+	'Entrepreneur','Genuine','A leader','Professional','Researcher','Explorer','Inventor','Intelligent (academically and socially)',
+	'Creative','Family man','Imaginative','Dedicated','A team player','I persevere','Devoted','A man of my word','Eager for knowledge',
+	'Hungry to be the best coder that I can be','True to myself','Neat freak','Risk taker'
+];
+
+var iAmNot = [
+	'Not afraid of hard work','Not afraid to ask questions','Not selfish','Not afraid of challenges','Not afraid to make mistakes',
+	'Never get my feathers ruffled','Not Egotistical','Not self centered','Not sloppy','Not pretensive','Not critical of others (just myself)',
+	'Not a know it all','Not a follower','Not tolerant of prejudice or racism'
+];
+
+var frontEnd = [
+	{name: 'HTML5',         value: 95, color: ['#D3B6C6', '#4B253A']},
+	{name: 'CSS3',          value: 90, color: ['#FCE6A4', '#EFB917']},
+	{name: 'Bootstarp',     value: 85, color: ['#BEE3F7', '#45AEEA']},
+	{name: 'JavaScript',    value: 80, color: ['#F8F9B6', '#D2D558']},
+	{name: 'jQuery',        value: 90, color: ['#F4BCBF', '#D43A43']},
+	{name: 'AJAX',          value: 90, color: ['#D3B6C6', '#4B253A']},
+	{name: 'd3.js',         value: 50, color: ['#FCE6A4', '#EFB917']},
+	{name: 'Backbone,js',   value: 85, color: ['#BEE3F7', '#45AEEA']},
+	{name: 'Underscore.js', value: 85, color: ['#F8F9B6', '#D2D558']},
+	{name: 'Handlebars.js', value: 85, color: ['#F4BCBF', '#D43A43']},
+	{name: 'AngularJS',     value: 35, color: ['#D3B6C6', '#4B253A']}
+];
+
+var backEnd  = [
+	{name: 'Ruby',          value: 85, color: ['#D3B6C6', '#4B253A']},
+	{name: 'Rails',         value: 80, color: ['#FCE6A4', '#EFB917']},
+	{name: 'Sinatra',       value: 95, color: ['#BEE3F7', '#45AEEA']},
+	{name: 'PHP',           value: 50, color: ['#F8F9B6', '#D2D558']},
+	{name: 'CodeIgniter',   value: 70, color: ['#D3B6C6', '#4B253A']},
+	{name: 'MySQL',         value: 75, color: ['#FCE6A4', '#EFB917']},
+	{name: 'PostgreSQL',    value: 90, color: ['#BEE3F7', '#45AEEA']},
+	{name: 'RSpec',         value: 65, color: ['#F8F9B6', '#D2D558']},
+	{name: 'Capybara',      value: 60, color: ['#F8F9B6', '#D2D558']}
+];
+
+var projects = [
+	{name: 'twendy', image: 'twendy.png', alt: 'Twendy Application', 
+	 links: {url: 'http://twendy-app.herokuapp.com/', github: 'https://github.com/liormb/twendy'},
+	 stack: ['Ruby on Rails','PostgreSQL','JS','d3',"API's",'RSpec']
+	},
+	{name: 'github lab', image: 'githublab.png', alt: 'GithubLab Application',
+	 links: {url: 'http://githublab.herokuapp.com/', github: 'https://github.com/liormb/GithubLab'},
+	 stack: ['JS','Backbone','Underscore','jQuery','API','Bootstrap']
+	},
+	{name: 'block overflow', image: 'blockoverflow.png', alt: 'Block Overflow Application',
+	 links: {url: 'http://blogjunky.herokuapp.com/', github: 'https://github.com/liormb/BlockOverflow'},
+	 stack: ['Sinatra','PostgreSQL','HTML5','CSS3',"API's"]
+	},
+	{name: 'denatale', image: 'denatale.png', alt: 'DeNatale Jewelers Application',
+	 links: {url: 'http://roundidea.com/engagement/engagement_rings', github: 'https://github.com/liormb'},
+	  stack: ['PHP','MySQL','HTML5','CSS3','jQuery','AJAX']
+	},
+	{name: 'echonest artists', image: 'echonest-artists.png', alt: 'Echonest Artists Application',
+	 links: {url: 'http://echonest-artists.herokuapp.com/', github: 'https://github.com/liormb/Echonest-Artists'},
+	 stack: ['Ruby on Rails','PostgreSQL','AngularJS','jQuery','Bootstrap','API']
+	},
+	{name: 'words', image: 'words.png', alt: 'Words Application',
+	 links: {url: 'http://liormb.com', github: 'http://liormb.com'},
+	 stack: ['Ruby on Rails','d3','HTML5','CSS3','jQuery','AJAX']
+	}
+];
+
+// ====================================
+//               Scrolling
+// ====================================
+
 // Scroll all the way to the top
 function scrollToTop(){
-	$('html, body').animate({scrollTop: 0}, 1000, 'swing');
+	$('html, body').animate({scrollTop: 0}, 1400, 'swing');
 }
 
 // Scroll to section
@@ -10,109 +79,134 @@ function scrollTo(event) {
 	event.preventDefault();
 	var diff = $(document).height() - $(window).height();
 	var dest = ($(this.hash).offset().top > diff) ? diff : $(this.hash).offset().top;
+	console.log($(this).context.hash);
 	switch ($(this).context.hash) {
-		case '#about-me': dest += $('#portfolio-header').height() + 65; break;
-		case '#skills': dest -= $('#skills h1').height() + 10; break;
-		case '#portfolio-header': dest -= $('#portfolio-header').height() + 5; break;
+		case '#about-me' : dest -= $('header').height(); break;
+		case '#skills'   : dest -= $('.skills h1').height() + 10; break;
+		case '#portfolio': dest -= $('.portfolio-header').height() + 5; break;
+		case '#contact'  : dest -= $('form').height() -390; break;
 	}
-  $('html, body').animate({scrollTop: dest}, 1000, 'swing');
+  $('html, body').animate({scrollTop: dest}, 1400, 'swing');
+}
+
+// ====================================
+//    competencies | i-am & i-am-not
+// ====================================
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
+function renderCompetencies(data, type){
+	var $target = (type === 'i-am') ? $('.i-am') : $('.i-am-not');
+	$.each(shuffleArray(data), function(index){
+		var fontClass = 'font-' + (Math.floor(Math.random() * 5) + 1);
+		$target.append('<p class="' +  fontClass + '">' + data[index] + '</p>');
+	});
+}
+
+function competencies(){
+	renderCompetencies(iAm, 'i-am');
+	renderCompetencies(iAmNot, 'i-am-not');
+}
+
+// ====================================
+//                skills
+// ====================================
+
+function renderSkills(data, type){
+	var j = (type === 'front-end') ? 0 : frontEnd.length;
+	var $target = (type === 'front-end') ? $('.front-end') : $('.back-end');
+
+	$target.append('<h1>'+type+'</h1>');
+	
+	for (var i = 1; i <= data.length; i++){
+		var $circle = '<div id="circle-'+(i+j)+'" class="circle"></div>';
+		var $child  = '<div class="skill shadow"><div class="circle-container"></div><h1>'+data[i-1].name+'</h1>'+$circle+'</div>';
+		
+		$target.append($child);
+		$('.skill h1').circleType({radius: 42});
+		
+		Circles.create({
+			id:         $('#circle-'+(i+j))[0].id,
+			percentage: data[i-1].value,
+			radius:     25,
+			width:      25,
+			colors:     data[i-1].color
+		});
+	}
+}
+function skills(){
+	renderSkills(frontEnd, 'front-end');
+	renderSkills(backEnd, 'back-end');
+}
+
+// ====================================
+//              portfolio
+// ====================================
+
+function portfolio(){
+	$target = $('.portfolio-container');
+	$.each(projects, function(index){
+
+		for (var i=0, $stack='', $tag='&#124'; i < projects[index].stack.length; i++){
+			$stack += projects[index].stack[i]+' '+$tag+' ';
+		}
+		$stack = $stack.substring(0, $stack.length - $tag.length - 2);
+
+		$target.append( 
+			'<section class="project shadow">'+
+				'<img src="assets/images/'+projects[index].image+'" alt="'+projects[index].alt+'">'+
+				'<div class="project-caption ease-transition">'+
+					'<h1><a class="slow-transition" href="'+projects[index].links.url+'" target="_blank">'+projects[index].name+'</a></h1>'+
+					'<h2>'+$stack+'</h2>'+
+					'<a href="'+projects[index].links.github+'" target="_blank"><span class="project-github"></span></a>'+
+				'</div>'+
+			'</section>'
+		);
+	});
+}
+
+// ====================================
+//            page animation
+// ====================================
+
+// Description Animation
+function descriptionAnimation(){
+	$('.description p').animate({opacity: 1, left: 0}, 1000, 'swing');
+	$('.description img').animate({opacity: 1, right: 0}, 1000, 'swing');
 }
 
 // About-Me Animation
 function aboutMeBanner(){
-	$('.about-me-banner').delay(800).animate({bottom: 0}, 800, 'swing');
+	$('.about-me-banner').delay(1000).animate({bottom: 0, opacity: 1}, 800, 'swing');
 }
 
-// Description Animation
-function descriptionAnimation(){
-	$('#description p').animate({opacity: 1, left: '10%'}, 1000, 'swing');
-	$('#description img').animate({opacity: 1, right: '10%'}, 1000, 'swing');
-}
-
-// I-AM Not Animation
-function resizeNotText(){
-	$('#competencies h3 span')
-		.animate({fontSize: 58, top: 68, right: 128}, 800, 'swing', function(){
-			$(this).animate({fontSize: 50, top: 76, right: 136}, 800, 'swing');
-		});
-}
-
-// Arranging the skills in a circle
-function distributeSkills() {
-  var radius = 160;
-  var fields = $('.skill'), container = $('.front-end'),
-    width = container.width(), height = container.height(),
-    angle = 0, step = (4*Math.PI) / fields.length;
-
-  fields.each(function() {
-    var x = Math.round(width/2 + radius * Math.cos(angle) - $(this).width()/2);
-    var y = Math.round(height/2 + radius * Math.sin(angle) - $(this).height()/2);
-    $(this).css({left: x + 'px', top: y + 40 + 'px'});
-    angle += step;
-  });
-}
-
-// Text in skills is rounded
-function textToCircle(){
-	$('.skill h3').circleType({ radius:42 });
-}
-
-// Make the inner skill level
-function skillsInnerCircles(){
-	var colors = [
-		['#D3B6C6', '#4B253A'], ['#FCE6A4', '#EFB917'], ['#BEE3F7', '#45AEEA'], ['#F8F9B6', '#D2D558'], ['#F4BCBF', '#D43A43'],
-		['#D3B6C6', '#4B253A'], ['#FCE6A4', '#EFB917'], ['#BEE3F7', '#45AEEA'], ['#F8F9B6', '#D2D558'], ['#F4BCBF', '#D43A43'],
-		['#D3B6C6', '#4B253A'], ['#FCE6A4', '#EFB917'], ['#BEE3F7', '#45AEEA'], ['#F8F9B6', '#D2D558']
-	];
-
-	for (var i = 1; i <= 14; i++) {
-		var child = document.getElementById('circles-' + i),
-			percentage = Math.floor((Math.random()*50)+50);
-
-		Circles.create({
-			id:         child.id,
-			percentage: percentage,
-			radius:     25,
-			width:      25,
-			number:   	percentage,
-			text:       '%',
-			colors:     colors[i - 1]
-		});
-	}
-}
-
-// Build the skill section
-function skills(){
-	textToCircle();
-	//distributeSkills();
-	skillsInnerCircles();
-}
-
-// Timing the effects based on position on screen
-function manageEffects(){
-	var pos = $(window).scrollTop();
-	switch (true){
-		case (pos >= 0 && pos < 370): descriptionAnimation(); aboutMeBanner(); break;
-		case (pos == 370): resizeNotText(); break;
-		case (pos >= 1000): skillsInnerCircles(); break;
-	}
-}
-function manageEffectsPlain(){
+function pageAnimation(){
 	descriptionAnimation();
 	aboutMeBanner();
-	resizeNotText();
 }
 
-// Handle all events handlers
+// ====================================
+//            handle events
+// ====================================
+
 function eventHandlers(){
-	manageEffectsPlain();
-	//$(window).on('scroll', manageEffects);
-	$('nav a').on('click', scrollTo);
 	$('.logo').on('click', scrollToTop);
+	$('header nav a').on('click', scrollTo);
 	$('.sticky').sticky({ topSpacing: 0 });
 }
 
 $(function() {
 	eventHandlers();
+	pageAnimation();
+	competencies();
 	skills();
+	portfolio();
 });
