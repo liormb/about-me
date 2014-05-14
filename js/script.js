@@ -1,5 +1,9 @@
 // Javascript
 
+// ====================================
+//               variables
+// ====================================
+
 var iAm = [
 	'Entrepreneur','Genuine','A leader','Professional','Researcher','Explorer','Inventor','Intelligent (academically and socially)',
 	'Creative','Family man','Imaginative','Dedicated','A team player','I persevere','Devoted','A man of my word','Eager for knowledge',
@@ -20,10 +24,10 @@ var frontEnd = [
 	{name: 'jQuery',        value: 90, color: ['#F4BCBF', '#D43A43']},
 	{name: 'AJAX',          value: 90, color: ['#D3B6C6', '#4B253A']},
 	{name: 'd3.js',         value: 50, color: ['#FCE6A4', '#EFB917']},
+	{name: 'AngularJS',     value: 35, color: ['#D3B6C6', '#4B253A']},
 	{name: 'Backbone,js',   value: 85, color: ['#BEE3F7', '#45AEEA']},
 	{name: 'Underscore.js', value: 85, color: ['#F8F9B6', '#D2D558']},
-	{name: 'Handlebars.js', value: 85, color: ['#F4BCBF', '#D43A43']},
-	{name: 'AngularJS',     value: 35, color: ['#D3B6C6', '#4B253A']}
+	{name: 'Handlebars.js', value: 85, color: ['#F4BCBF', '#D43A43']}
 ];
 
 var backEnd  = [
@@ -66,10 +70,24 @@ var projects = [
 ];
 
 // ====================================
-//               Scrolling
+//       extended Array prototype
 // ====================================
 
-// Scroll all the way to the top
+Array.prototype.shuffle = function() {
+  for (var i = this.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = this[i];
+    this[i] = this[j];
+    this[j] = temp;
+  }
+  return this;
+}
+
+// ====================================
+//               scrolling
+// ====================================
+
+// Scroll to the top of the page
 function scrollToTop(){
 	$('html, body').animate({scrollTop: 0}, 1400, 'swing');
 }
@@ -93,19 +111,9 @@ function scrollTo(event) {
 //    competencies | i-am & i-am-not
 // ====================================
 
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
-
 function renderCompetencies(data, type){
 	var $target = (type === 'i-am') ? $('.i-am') : $('.i-am-not');
-	$.each(shuffleArray(data), function(index){
+	$.each(data.shuffle(), function(index){
 		var fontClass = 'font-' + (Math.floor(Math.random() * 5) + 1);
 		$target.append('<p class="' +  fontClass + '">' + data[index] + '</p>');
 	});
