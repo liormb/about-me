@@ -589,11 +589,20 @@ footer {
   border-width: 14px;
   z-index: 999;
 }
+li::-moz-focus-inner,
+a::-moz-focus-inner { border: 0 !important; }
+a { outline: 0 !important; text-decoration: none !important; }
 .font-1 { font: 300 20px/24px Helvetica; }
 .font-2 { font: italic 20px/24px "adelle", serif; }
 .font-3 { font: italic 22px/24px; }
 .font-4 { font: normal 23px/24px sans-serif, serif; }
 .font-5 { font: 100 italic 20px/24px Arial; }
+
+@-moz-document url-prefix() {
+	.banner-container { top: -80px; margin-top: 0; }
+	.description-container { padding: 10px 0 30px; }
+	.description-container img { margin-top: -10px; }
+}
 
 /* ==================== */
 /*   responsive media   */
@@ -603,11 +612,18 @@ footer {
 @media (max-width: 1200px) {
 	.description-container p { padding-right: 40px; }
 	.description-container img { margin-top: 40px; }
+	@-moz-document url-prefix() {
+		.description-container img { margin-top: -30px; }
+	}
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (max-width: 992px) {
 	.description-container img { margin-top: 120px; }
+	@-moz-document url-prefix() {
+		.description { margin-top: -40px; }
+		.description-container img { margin-top: 80px; }
+	}
 	.hu img, .ga img { display: block; margin: 0 auto; }
 	.hu .education-description { top: 23px; }
 	.education-description, .education-description h1 { text-align: center; }
@@ -620,6 +636,7 @@ footer {
 	.social-header li { margin-right: 20px; }
 	header .container { padding: 0 20px; }
 	header li { margin-right: 20px; }
+	.banner-container { height: 180px; }
 	.about-me-banner { padding-top: 30px; font-size: 2em; }
 	.description-container { text-align: center; }
 	.description-container p { width: 100%; padding: 0 20px; text-align: center; }
