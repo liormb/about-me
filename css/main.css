@@ -673,3 +673,23 @@ a { outline: 0 !important; text-decoration: none !important; }
 	header li a { font-size: 12px; }
 	.about-me-banner { padding-top: 38px; font-size: 1.4em; }
 }
+
+/* IE10+ specific styles go here */ 
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+  .banner-container { top: -80px; margin-top: 0; }
+	.description-container { padding: 10px 0 30px; }
+	.description-container p { top: -20px; }
+	.description-container img { margin-top: -10px; }
+}
+/* IE10+ and Large devices (large desktops, 1200px and up) */
+@media screen and (-ms-high-contrast: active) and (max-width: 1200px), (-ms-high-contrast: none) and (max-width: 1200px) {
+	.description-container img { margin-top: 10px; }
+}
+/* IE10+ and Medium devices (desktops, 992px and up) */
+@media screen and (-ms-high-contrast: active) and (max-width: 992px), (-ms-high-contrast: none) and (max-width: 992px) {
+	.description-container img { margin-top: 80px; }
+}
+/* IE10+ and Smaller devices (iPhone, less than 768px) */
+@media screen and (-ms-high-contrast: active) and (max-width: 768px), (-ms-high-contrast: none) and (max-width: 768px) {
+	.description-container img { margin-top: -40px; margin-bottom: 60px; }
+}

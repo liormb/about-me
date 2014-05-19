@@ -1,0 +1,23 @@
+/* IE */
+
+.banner-container {
+	top: -80px;
+	margin-top: 0;
+}
+.description-container {
+	padding: 10px 0 30px;
+}
+.description-container img {
+	margin-top: -10px;
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {
+	.description-container img { margin-top: -30px; }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+	.description { margin-top: -40px; }
+	.description-container img { margin-top: 80px; }
+}
