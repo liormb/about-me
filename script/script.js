@@ -1,7 +1,7 @@
 // Javascript
 
 // ====================================
-//               variables
+//               Variables
 // ====================================
 
 var iAm = [
@@ -17,29 +17,29 @@ var iAmNot = [
 ];
 
 var frontEnd = [
-	{name: 'HTML5',         value: 95, color: ['#D3B6C6', '#4B253A']},
-	{name: 'CSS3',          value: 90, color: ['#FCE6A4', '#EFB917']},
-	{name: 'Bootstarp',     value: 85, color: ['#BEE3F7', '#45AEEA']},
-	{name: 'JavaScript',    value: 80, color: ['#F8F9B6', '#D2D558']},
+	{name: 'HTML5',         value: 95, color: ['#BEE3F7', '#45AEEA']},
+	{name: 'CSS3',          value: 95, color: ['#FCE6A4', '#EFB917']},
+	{name: 'Bootstarp',     value: 85, color: ['#D3B6C6', '#4B253A']},
+	{name: 'JavaScript',    value: 85, color: ['#F8F9B6', '#D2D558']},
 	{name: 'jQuery',        value: 90, color: ['#F4BCBF', '#D43A43']},
 	{name: 'AJAX',          value: 90, color: ['#D3B6C6', '#4B253A']},
 	{name: 'd3.js',         value: 50, color: ['#FCE6A4', '#EFB917']},
-	{name: 'AngularJS',     value: 35, color: ['#D3B6C6', '#4B253A']},
+	{name: 'AngularJS',     value: 30, color: ['#D3B6C6', '#4B253A']},
 	{name: 'Backbone,js',   value: 85, color: ['#BEE3F7', '#45AEEA']},
 	{name: 'Underscore.js', value: 85, color: ['#F8F9B6', '#D2D558']},
 	{name: 'Handlebars.js', value: 85, color: ['#F4BCBF', '#D43A43']}
 ];
 
 var backEnd  = [
-	{name: 'Ruby',          value: 85, color: ['#D3B6C6', '#4B253A']},
+	{name: 'Ruby',          value: 85, color: ['#F4BCBF', '#D43A43']},
 	{name: 'Rails',         value: 80, color: ['#FCE6A4', '#EFB917']},
 	{name: 'Sinatra',       value: 95, color: ['#BEE3F7', '#45AEEA']},
 	{name: 'PHP',           value: 50, color: ['#F8F9B6', '#D2D558']},
-	{name: 'CodeIgniter',   value: 70, color: ['#D3B6C6', '#4B253A']},
-	{name: 'MySQL',         value: 75, color: ['#FCE6A4', '#EFB917']},
-	{name: 'PostgreSQL',    value: 90, color: ['#BEE3F7', '#45AEEA']},
-	{name: 'RSpec',         value: 65, color: ['#F8F9B6', '#D2D558']},
-	{name: 'Capybara',      value: 60, color: ['#F8F9B6', '#D2D558']}
+	{name: 'CodeIgniter',   value: 70, color: ['#FCE6A4', '#EFB917']},
+	{name: 'MySQL',         value: 65, color: ['#F8F9B6', '#D2D558']},
+	{name: 'PostgreSQL',    value: 90, color: ['#D3B6C6', '#4B253A']},
+	{name: 'RSpec',         value: 65, color: ['#F4BCBF', '#D43A43']},
+	{name: 'Capybara',      value: 60, color: ['#BEE3F7', '#45AEEA']}
 ];
 
 var projects = [
@@ -63,6 +63,10 @@ var projects = [
 	 links: {url: 'http://echonest-artists.herokuapp.com/', github: 'https://github.com/liormb/Echonest-Artists'},
 	 stack: ['Ruby on Rails','PostgreSQL','AngularJS','jQuery','Bootstrap','API']
 	},
+	{name: 'checkers', image: 'checkers.png', alt: 'Checkers Application',
+	 links: {url: 'http://liormb.com', github: 'https://github.com/liormb/Checkers'},
+	 stack: ['HTML5','CSS3','JavaScript','jQuery','jQueryUI','Bootstrap']
+	},
 	{name: 'words', image: 'words.png', alt: 'Words Application',
 	 links: {url: 'http://liormb.com', github: 'http://liormb.com'},
 	 stack: ['Ruby on Rails','d3','HTML5','CSS3','jQuery','AJAX']
@@ -70,7 +74,7 @@ var projects = [
 ];
 
 // ====================================
-//       extended Array prototype
+//       Extended Array Prototype
 // ====================================
 
 Array.prototype.shuffle = function() {
@@ -84,7 +88,7 @@ Array.prototype.shuffle = function() {
 }
 
 // ====================================
-//               scrolling
+//               Scrolling
 // ====================================
 
 // Scroll to the top of the page
@@ -108,7 +112,7 @@ function scrollTo(event) {
 }
 
 // ====================================
-//    competencies | i-am & i-am-not
+//    Competencies | I-Am & I-Am-Not
 // ====================================
 
 function renderCompetencies(data, type){
@@ -125,7 +129,7 @@ function competencies(){
 }
 
 // ====================================
-//                skills
+//                Skills
 // ====================================
 
 function renderSkills(data, type){
@@ -150,13 +154,14 @@ function renderSkills(data, type){
 		});
 	}
 }
+
 function skills(){
 	renderSkills(frontEnd, 'front-end');
 	renderSkills(backEnd, 'back-end');
 }
 
 // ====================================
-//              portfolio
+//              Portfolio
 // ====================================
 
 function portfolio(){
@@ -182,7 +187,7 @@ function portfolio(){
 }
 
 // ====================================
-//            page animation
+//            Page Animation
 // ====================================
 
 // Description Animation
@@ -196,13 +201,14 @@ function aboutMeBanner(){
 	$('.about-me-banner').delay(1000).animate({bottom: 0, opacity: 1}, 800, 'swing');
 }
 
+// Run All Page Animation
 function pageAnimation(){
 	descriptionAnimation();
 	aboutMeBanner();
 }
 
 // ====================================
-//            handle events
+//            Handle Events
 // ====================================
 
 function eventHandlers(){
@@ -210,6 +216,8 @@ function eventHandlers(){
 	$('header nav a').on('click', scrollTo);
 	$('.sticky').sticky({ topSpacing: 0 });
 }
+
+// ------------------------------------
 
 $(function() {
 	eventHandlers();

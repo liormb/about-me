@@ -14,9 +14,9 @@ body {
 	padding: 0;
 }
 
-/* ==================== */
-/*     Social Header    */
-/* ==================== */
+/* ==================================== */
+/*             Social Header            */
+/* ==================================== */
 
 .social-header {
 	height: 40px;
@@ -31,9 +31,9 @@ body {
 	margin-right: 0;
 }
 
-/* ==================== */
-/*        Header        */
-/* ==================== */
+/* ==================================== */
+/*                 Header               */
+/* ==================================== */
 
 header {
 	width: 100%;
@@ -82,9 +82,9 @@ header li:hover a {
 	color: #f47920;
 }
 
-/* ==================== */
-/*        Banner        */
-/* ==================== */
+/* ==================================== */
+/*                 Banner               */
+/* ==================================== */
 
 .banner-container {
 	position: relative;
@@ -114,9 +114,9 @@ header li:hover a {
 	background: rgba(255,255,255,.5);
 }
 
-/* ==================== */
-/*     description      */
-/* ==================== */
+/* ==================================== */
+/*             Description              */
+/* ==================================== */
 
 .description {
 	position: relative;
@@ -152,9 +152,9 @@ header li:hover a {
 	opacity: 0;
 }
 
-/* ==================== */
-/*       About Me       */
-/* ==================== */
+/* ==================================== */
+/*               About Me               */
+/* ==================================== */
 
 .competencies-container {
 	min-height: 500px;
@@ -189,9 +189,9 @@ header li:hover a {
 	line-height: 24px;
 }
 
-/* ==================== */
-/*        skills        */
-/* ==================== */
+/* ==================================== */
+/*                Skills                */
+/* ==================================== */
 
 .skills {
 	background: rgb(245,245,245);
@@ -271,9 +271,9 @@ header li:hover a {
 	display: none;
 }
 
-/* ==================== */
-/*       education      */
-/* ==================== */
+/* ==================================== */
+/*               Education              */
+/* ==================================== */
 
 .education {
 	min-height: 300px;
@@ -326,9 +326,9 @@ header li:hover a {
 	font-size: 12px;
 }
 
-/* ==================== */
-/*      portfolio       */
-/* ==================== */
+/* ==================================== */
+/*               Portfolio              */
+/* ==================================== */
 
 .portfolio-header {
 	position: relative;
@@ -418,9 +418,9 @@ header li:hover a {
 	bottom: 0;
 }
 
-/* ==================== */
-/*        contact       */
-/* ==================== */
+/* ==================================== */
+/*                Contact               */
+/* ==================================== */
 
 .contact-container {
 	min-height: 500px;
@@ -487,18 +487,18 @@ header li:hover a {
 	cursor: pointer;
 }
 
-/* ==================== */
-/*        footer        */
-/* ==================== */
+/* ==================================== */
+/*                Footer                */
+/* ==================================== */
 
 footer {
 	height: 160px;
 	background: rgb(50,50,50);
 }
 
-/* ==================== */
-/*    global classes    */
-/* ==================== */
+/* ==================================== */
+/*            Global Classes            */
+/* ==================================== */
 
 .sticky {
 	position: relative;
@@ -592,10 +592,10 @@ footer {
 li::-moz-focus-inner,
 a::-moz-focus-inner { border: 0 !important; }
 a { outline: 0 !important; text-decoration: none !important; }
-.font-1 { font: 300 20px/24px Helvetica; }
-.font-2 { font: italic 20px/24px "adelle", serif; }
-.font-3 { font: italic 22px/24px; }
-.font-4 { font: normal 23px/24px sans-serif, serif; }
+.font-1 { font: 300 18px/24px Helvetica !important;}
+.font-2 { font: 100 italic 20px/24px "adelle", serif; }
+.font-3 { font: 100 italic 21px/24px !important; }
+.font-4 { font: 100 20px/24px sans-serif, serif !important; }
 .font-5 { font: 100 italic 20px/24px Arial; }
 
 @-moz-document url-prefix() {
@@ -604,9 +604,9 @@ a { outline: 0 !important; text-decoration: none !important; }
 	.description-container img { margin-top: -10px; }
 }
 
-/* ==================== */
-/*   responsive media   */
-/* ==================== */
+/* ==================================== */
+/*           Responsive Media           */
+/* ==================================== */
 
 /* Large devices (large desktops, 1200px and up) */
 @media (max-width: 1200px) {
