@@ -4,6 +4,11 @@
 //               Variables
 // ====================================
 
+var $msgElement = 
+	'<div class="message shadow">'+
+		'<div class="message-container"></div>'+
+	'</div>';
+
 var iAm = [
 	'Entrepreneur','Genuine','A leader','Professional','Researcher','Explorer','Inventor','Intelligent (academically and socially)',
 	'Creative','Family man','Imaginative','Dedicated','A team player','I persevere','Devoted','A man of my word','Eager for knowledge',
@@ -64,7 +69,7 @@ var projects = [
 	 stack: ['Ruby on Rails','PostgreSQL','AngularJS','jQuery','Bootstrap','API']
 	},
 	{name: 'checkers', image: 'checkers.png', alt: 'Checkers Application',
-	 links: {url: 'http://liormb.com', github: 'https://github.com/liormb/Checkers'},
+	 links: {url: 'http://checkers-js.herokuapp.com/', github: 'https://github.com/liormb/Checkers'},
 	 stack: ['HTML5','CSS3','JavaScript','jQuery','jQueryUI','Bootstrap']
 	},
 	{name: 'words', image: 'words.png', alt: 'Words Application',
@@ -101,7 +106,6 @@ function scrollTo(event) {
 	event.preventDefault();
 	var diff = $(document).height() - $(window).height();
 	var dest = ($(this.hash).offset().top > diff) ? diff : $(this.hash).offset().top;
-	console.log($(this).context.hash);
 	switch ($(this).context.hash) {
 		case '#about-me' : dest -= $('header').height(); break;
 		case '#skills'   : dest -= $('.skills h1').height() + 10; break;
@@ -187,6 +191,45 @@ function portfolio(){
 }
 
 // ====================================
+//            Form Submission
+// ====================================
+
+// Test if an Email is Valid
+function isValidEmail(email) {
+  var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+  return pattern.test(email);
+};
+
+// Send Email
+function formSubmission(event){
+	var $form = $(this);
+	var $inputs = $form.find('input, textarea');
+	var serializeData = $form.serialize();
+
+	$inputs.prop("disabled", true);
+
+	var name  = $('#name').val(),
+		  email = $('#email').val();
+
+	if ( name && email && isValidEmail(email) ){
+		$.ajax({
+			url: 'script/mail.php',
+			type: 'POST',
+			data: serializeData
+		}).done(function(){
+			showMessage("Thank you for contacting me<br>Your message has been received");
+		}).fail(function(){
+			showMessage("Your message can not be send at this moment<br>Please try again later");
+		});
+
+	} else showMessage("Your message can not be submitted<br>Make sure to enter a name and a vaild email");
+
+	$inputs.prop("disabled", false);
+	$form.trigger("reset");
+	event.preventDefault();
+}
+
+// ====================================
 //            Page Animation
 // ====================================
 
@@ -194,6 +237,18 @@ function portfolio(){
 function descriptionAnimation(){
 	$('.description p').animate({opacity: 1, left: 0}, 1000, 'swing');
 	$('.description img').animate({opacity: 1, right: 0}, 1000, 'swing');
+}
+
+// Conformation Message
+function showMessage(message){
+	$('body').prepend($msgElement);
+
+	$('.message-container').append('<h1>'+message+'</h1>');
+	$('.message').animate({opacity: 1}, 400, function(){
+			$(this).delay(2500).animate({opacity: 0}, 400, function(){
+				$(this).remove();
+			});
+		});
 }
 
 // About-Me Animation
@@ -215,6 +270,7 @@ function eventHandlers(){
 	$('.logo').on('click', scrollToTop);
 	$('header nav a').on('click', scrollTo);
 	$('.sticky').sticky({ topSpacing: 0 });
+	$('#contact-form').submit(formSubmission);
 }
 
 // ------------------------------------
