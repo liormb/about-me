@@ -266,17 +266,20 @@ header li:hover a {
 	width: 100px;
 	height: 100px;
 	margin: 8px;
+	padding: 2px;
 	border: 5px solid rgb(240,240,240);
 	border-radius: 50px;
 	background: rgb(220,220,220);
 }
 .skill h1 {
 	position: relative;
-	top: -18px;
-	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	margin: 0;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+		"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	text-transform: none;
 	font-size: 9px;
+	line-height: 9px;
 	color: rgb(100,100,100);
 }
 .circle-container {
@@ -284,22 +287,16 @@ header li:hover a {
 	top: 15%;
 	left: 15%;
 	width: 70%;
-  height:0;
-  padding-bottom: 70%;
+  height: 70%;
   border-radius: 50%;
   background: rgb(200,200,200); 
 }
 .circle {
 	position: absolute;
-	top: 20px;
-	left: 20px;
+	top: 22.5%;
+	left: 22.5%;
 }
-.circles-text-wrp,
 .circles-number {
-	display: none;
-}
-.circles-text {
-	font-size: 10px;
 	display: none;
 }
 

@@ -144,10 +144,12 @@ function renderSkills(data, type){
 	
 	for (var i = 1; i <= data.length; i++){
 		var $circle = '<div id="circle-'+(i+j)+'" class="circle"></div>';
-		var $child  = '<div class="skill shadow"><div class="circle-container"></div><h1>'+data[i-1].name+'</h1>'+$circle+'</div>';
+		var $child  = '<div id="skill-'+(i+j)+'" class="skill shadow"><div class="circle-container"></div><h1>'+data[i-1].name+'</h1>'+$circle+'</div>';
 		
 		$target.append($child);
-		$('.skill h1').circleType({radius: 42});
+		console.log();
+		//$('.skill h1').arctext({radius: 200});
+		//$('#skill-'+(i+j)+' h1').circleType({radius: 300});
 		
 		Circles.create({
 			id:         $('#circle-'+(i+j))[0].id,
@@ -157,6 +159,7 @@ function renderSkills(data, type){
 			colors:     data[i-1].color
 		});
 	}
+	$target.find('.skill h1').circleType({radius: 40});
 }
 
 function skills(){
@@ -221,11 +224,11 @@ function formSubmission(event){
 		}).fail(function(){
 			showMessage("Your message can not be send at this moment<br>Please try again later");
 		});
+		$form.trigger("reset");
 
 	} else showMessage("Your message can not be submitted<br>Make sure to enter a name and a vaild email");
 
 	$inputs.prop("disabled", false);
-	$form.trigger("reset");
 	event.preventDefault();
 }
 
@@ -282,3 +285,4 @@ $(function() {
 	skills();
 	portfolio();
 });
+
