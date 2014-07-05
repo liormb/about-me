@@ -4,6 +4,8 @@
 //               Variables
 // ====================================
 
+var sections = ['description','competencies','skills','education','portfolio','contact'];
+
 var $msgElement = 
 	'<div class="message shadow">'+
 		'<div class="message-container"></div>'+
@@ -24,7 +26,7 @@ var iAmNot = [
 var frontEnd = [
 	{name: 'HTML5',         value: 95, color: ['#BEE3F7', '#45AEEA']},
 	{name: 'CSS3',          value: 95, color: ['#FCE6A4', '#EFB917']},
-	{name: 'Bootstarp',     value: 85, color: ['#D3B6C6', '#4B253A']},
+	{name: 'Bootstrap',     value: 85, color: ['#D3B6C6', '#4B253A']},
 	{name: 'JavaScript',    value: 85, color: ['#F8F9B6', '#D2D558']},
 	{name: 'jQuery',        value: 90, color: ['#F4BCBF', '#D43A43']},
 	{name: 'AJAX',          value: 90, color: ['#D3B6C6', '#4B253A']},
@@ -52,31 +54,38 @@ var projects = [
 	 links: {url: 'http://twendy-app.herokuapp.com/', github: 'https://github.com/liormb/twendy'},
 	 stack: ['Ruby on Rails','PostgreSQL','JS','d3',"API's",'RSpec']
 	},
+	{name: 'tetris', image: 'tetris.png', alt: 'Tetris Application',
+	 links: {url: 'http://effectiveshape.com', github: 'https://github.com/liormb/Tetris'},
+	 stack: ['HTML5 Canvas','JavaScript','CSS3']
+	},
 	{name: 'github lab', image: 'githublab.png', alt: 'GithubLab Application',
 	 links: {url: 'http://githublab.herokuapp.com/', github: 'https://github.com/liormb/GithubLab'},
 	 stack: ['JS','Backbone','Underscore','jQuery','API','Bootstrap']
-	},
-	{name: 'block overflow', image: 'blockoverflow.png', alt: 'Block Overflow Application',
-	 links: {url: 'http://blogjunky.herokuapp.com/', github: 'https://github.com/liormb/BlockOverflow'},
-	 stack: ['Sinatra','PostgreSQL','HTML5','CSS3',"API's"]
 	},
 	{name: 'denatale', image: 'denatale.png', alt: 'DeNatale Jewelers Application',
 	 links: {url: 'http://roundidea.com/engagement/engagement_rings', github: 'https://github.com/liormb'},
 	  stack: ['PHP','MySQL','HTML5','CSS3','jQuery','AJAX']
 	},
-	{name: 'echonest artists', image: 'echonest-artists.png', alt: 'Echonest Artists Application',
-	 links: {url: 'http://echonest-artists.herokuapp.com/', github: 'https://github.com/liormb/Echonest-Artists'},
-	 stack: ['Ruby on Rails','PostgreSQL','AngularJS','jQuery','Bootstrap','API']
+	{name: 'block overflow', image: 'blockoverflow.png', alt: 'Block Overflow Application',
+	 links: {url: 'http://blogjunky.herokuapp.com/', github: 'https://github.com/liormb/BlockOverflow'},
+	 stack: ['Sinatra','PostgreSQL','HTML5','CSS3',"API's"]
 	},
 	{name: 'checkers', image: 'checkers.png', alt: 'Checkers Application',
 	 links: {url: 'http://checkers-js.herokuapp.com/', github: 'https://github.com/liormb/Checkers'},
 	 stack: ['HTML5','CSS3','JavaScript','jQuery','jQueryUI','Bootstrap']
 	},
 	{name: 'words', image: 'words.png', alt: 'Words Application',
-	 links: {url: 'http://liormb.com', github: 'http://liormb.com'},
+	 links: {url: 'http://liormb.com', github: 'https://github.com/liormb/Words'},
 	 stack: ['Ruby on Rails','d3','HTML5','CSS3','jQuery','AJAX']
+	},
+	{name: 'echonest artists', image: 'echonest-artists.png', alt: 'Echonest Artists Application',
+	 links: {url: 'http://echonest-artists.herokuapp.com/', github: 'https://github.com/liormb/Echonest-Artists'},
+	 stack: ['Ruby on Rails','PostgreSQL','AngularJS','jQuery','Bootstrap','API']
 	}
 ];
+
+var active;
+var preActive;
 
 // ====================================
 //       Extended Array Prototype
@@ -93,7 +102,7 @@ Array.prototype.shuffle = function() {
 }
 
 // ====================================
-//               Scrolling
+//           Scroll to Section
 // ====================================
 
 // Scroll to the top of the page
@@ -113,6 +122,125 @@ function scrollTo(event) {
 		case '#contact'  : dest -= $('form').height() -390; break;
 	}
   $('html, body').animate({scrollTop: dest}, 1400, 'swing');
+}
+
+// ====================================
+//          Scrolling Animation
+// ====================================
+
+// Description Animation
+function animateDescription(){
+	$('.description p').animate({opacity: 1, left: 0}, 1000, 'swing');
+	$('.description img').animate({opacity: 1, right: 0}, 1000, 'swing');
+}
+
+// About-Me Animation
+function animateBanner(){
+	$('.about-me-banner').delay(1000).animate({bottom: 0, opacity: 1}, 800, 'swing');
+}
+
+// Highlight the current active menu
+function animateMenu(active){
+	var nth;
+	switch(active){
+		case 'description' : 
+		case 'competencies': nth = 1; break;
+		case 'skills'      :
+		case 'education'   : nth = 2; break;
+		case 'portfolio'   : nth = 3; break;
+		case 'contact'     : nth = 4; break;
+		default            : nth = 1;
+	}
+	$('header li.active').removeClass('active');
+	$('header li:nth-child('+nth+')').addClass('active');
+}
+
+// Competencies animation (I-am/I-am-not)
+function animateCompetencies(){
+	$('.i-am-not h1 span').animate({fontSize: 65}, 650, function(){
+		$(this).animate({fontSize: 50}, 650);
+	});
+}
+
+// Education animation
+function animateEducation(){
+	$('.hu, .ga').animate({opacity: 1, top: 0, left: 0}, 850);
+}
+
+// Set all page section's top and bottom values
+function setSectionsPosition(){
+	var obj = {};
+	for (var i=0; i < sections.length; i++){
+		var top    = (i !== 0) ? $('.'+sections[i]).offset().top : 0;
+		var bottom = (i !== sections.length - 1) ? $('.'+sections[i+1]).offset().top - 1 : $(document).height();
+		obj[sections[i]] = { top: top, bottom: bottom };
+	}
+	return obj;
+}
+
+// Returns the current section presented on the page
+function getActiveSection(scroll, sections){
+	var offset = Math.floor($(window).height()/1.5);
+	for (var key in sections){
+		var section = sections[key];
+		if (section.top - offset <= scroll && section.bottom - offset >= scroll)
+			return key;
+	}
+	return false;
+}
+
+// Manage which animation to play
+function manageAnimation(key){
+	switch(key){
+		case 'competencies': animateCompetencies(); break;
+		//case 'skills'      : skills(); break;
+		case 'education'   : animateEducation(); break;
+	}
+}
+
+// Page animation controller
+function pageAnimation(sPosition){
+	event.preventDefault();
+	event.stopPropagation();
+
+	preActive = active || null;
+	var scroll = $(window).scrollTop();
+	active = getActiveSection(scroll, sPosition);
+
+	if (active !== preActive){
+		manageAnimation(active);
+		animateMenu(active);
+	}
+}
+
+// 
+function pageAnimationEvents(sPosition){
+	$(window).scroll(function(){
+		pageAnimation(sPosition);
+	});
+	$(window).resize(function(){
+		sPosition = setSectionsPosition();
+		pageAnimation(sPosition);
+	});
+}
+
+// Fire when a page is loaded or refreshed
+function initPageAnimation(){
+	var sPosition = setSectionsPosition();
+	var height = $(window).height();
+	var scroll = $(window).scrollTop();
+	active = getActiveSection(scroll, sPosition);
+
+	animateMenu(active);
+	animateDescription();
+	animateBanner();
+
+	for (var key in sPosition){
+		var section = sPosition[key];
+		if (section.top < scroll + height && section.bottom > scroll)
+			manageAnimation(key);
+	}
+	pageAnimationEvents(sPosition);
 }
 
 // ====================================
@@ -147,9 +275,6 @@ function renderSkills(data, type){
 		var $child  = '<div id="skill-'+(i+j)+'" class="skill shadow"><div class="circle-container"></div><h1>'+data[i-1].name+'</h1>'+$circle+'</div>';
 		
 		$target.append($child);
-		console.log();
-		//$('.skill h1').arctext({radius: 200});
-		//$('#skill-'+(i+j)+' h1').circleType({radius: 300});
 		
 		Circles.create({
 			id:         $('#circle-'+(i+j))[0].id,
@@ -186,7 +311,7 @@ function portfolio(){
 				'<div class="project-caption ease-transition">'+
 					'<h1><a class="slow-transition" href="'+projects[index].links.url+'" target="_blank">'+projects[index].name+'</a></h1>'+
 					'<h2>'+$stack+'</h2>'+
-					'<a href="'+projects[index].links.github+'" target="_blank"><span class="project-github"></span></a>'+
+					'<a href="'+projects[index].links.github+'" target="_blank" title="Github Repository"><span class="project-github"></span></a>'+
 				'</div>'+
 			'</section>'
 		);
@@ -202,6 +327,18 @@ function isValidEmail(email) {
   var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
   return pattern.test(email);
 };
+
+// Conformation Message
+function showMessage(message){
+	$('body').prepend($msgElement);
+
+	$('.message-container').append('<h1>'+message+'</h1>');
+	$('.message').animate({opacity: 1}, 400, function(){
+			$(this).delay(2500).animate({opacity: 0}, 400, function(){
+				$(this).remove();
+			});
+		});
+}
 
 // Send Email
 function formSubmission(event){
@@ -233,39 +370,6 @@ function formSubmission(event){
 }
 
 // ====================================
-//            Page Animation
-// ====================================
-
-// Description Animation
-function descriptionAnimation(){
-	$('.description p').animate({opacity: 1, left: 0}, 1000, 'swing');
-	$('.description img').animate({opacity: 1, right: 0}, 1000, 'swing');
-}
-
-// Conformation Message
-function showMessage(message){
-	$('body').prepend($msgElement);
-
-	$('.message-container').append('<h1>'+message+'</h1>');
-	$('.message').animate({opacity: 1}, 400, function(){
-			$(this).delay(2500).animate({opacity: 0}, 400, function(){
-				$(this).remove();
-			});
-		});
-}
-
-// About-Me Animation
-function aboutMeBanner(){
-	$('.about-me-banner').delay(1000).animate({bottom: 0, opacity: 1}, 800, 'swing');
-}
-
-// Run All Page Animation
-function pageAnimation(){
-	descriptionAnimation();
-	aboutMeBanner();
-}
-
-// ====================================
 //            Handle Events
 // ====================================
 
@@ -279,10 +383,12 @@ function eventHandlers(){
 // ------------------------------------
 
 $(function() {
-	eventHandlers();
-	pageAnimation();
 	competencies();
 	skills();
 	portfolio();
 });
 
+$(window).load(function(){
+	eventHandlers();
+	initPageAnimation();
+});
