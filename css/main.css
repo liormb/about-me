@@ -263,8 +263,10 @@ header li.active a {
 	color: rgb(120,120,120);
 }
 .skill {
+	opacity: 0;
 	display: inline-block;
 	position: relative;
+	top: 100px;
 	width: 100px;
 	height: 100px;
 	margin: 8px;
@@ -273,6 +275,8 @@ header li.active a {
 	border-radius: 50px;
 	background: rgb(220,220,220);
 }
+.front-end .skill { left: -100px; }
+.back-end .skill { left: 100px; }
 .skill h1 {
 	position: relative;
 	margin: 0;
@@ -459,6 +463,9 @@ header li.active a {
 /*                Contact               */
 /* ==================================== */
 
+.contact {
+	position: relative;
+}
 .contact-container {
 	min-height: 500px;
 	padding: 40px 0;
@@ -524,6 +531,11 @@ header li.active a {
 	border-right: none;
 	cursor: pointer;
 }
+.contact .bird {
+	position: absolute;
+	left: 0;
+	bottom: 70px;
+}
 
 /* ==================================== */
 /*                Footer                */
@@ -538,6 +550,10 @@ footer {
 /*            Global Classes            */
 /* ==================================== */
 
+.skills,
+.education {
+	overflow: hidden;
+}
 .sticky {
 	position: relative;
 	z-index: 9999;

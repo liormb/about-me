@@ -86,6 +86,7 @@ var projects = [
 
 var active;
 var preActive;
+var fly = true;
 
 // ====================================
 //       Extended Array Prototype
@@ -162,9 +163,31 @@ function animateCompetencies(){
 	});
 }
 
+// Skills animation
+function animateSkills(){
+	var opacity = parseInt($($('.skill')[0]).css('opacity'), 10);
+	if (!opacity){
+		animateSkillsSet('front-end');
+		animateSkillsSet('back-end');
+	}
+}
+
 // Education animation
 function animateEducation(){
-	$('.hu, .ga').animate({opacity: 1, top: 0, left: 0}, 850);
+	var opacity = parseInt($($('.hu')).css('opacity'), 10);
+	if (!opacity)
+		$('.hu, .ga').animate({opacity: 1, top: 0, left: 0}, 800);
+}
+
+function animateContact(){
+	if (fly){
+		$('.bird').remove();
+		$('.contact').append('<img class="bird" src="assets/images/bird.gif" height="80">');
+		$('.bird').animate({bottom: 200, left: $(window).width()}, 10000, function(){
+			$(this).remove();
+			fly = false;
+		});
+	}
 }
 
 // Set all page section's top and bottom values
@@ -193,13 +216,15 @@ function getActiveSection(scroll, sections){
 function manageAnimation(key){
 	switch(key){
 		case 'competencies': animateCompetencies(); break;
-		//case 'skills'      : skills(); break;
+		case 'skills'      : animateSkills(); break;
 		case 'education'   : animateEducation(); break;
+		case 'contact'     : animateContact(); break;
 	}
 }
 
 // Page animation controller
-function pageAnimation(sPosition){
+function pageAnimation(event, sPosition){
+	var event = event || window.event //for IE
 	event.preventDefault();
 	event.stopPropagation();
 
@@ -213,14 +238,14 @@ function pageAnimation(sPosition){
 	}
 }
 
-// 
+// Handle page animation upon scrolling and resizing
 function pageAnimationEvents(sPosition){
-	$(window).scroll(function(){
-		pageAnimation(sPosition);
-	});
-	$(window).resize(function(){
+	$(window).scroll(function(event){
+		pageAnimation(event, sPosition);
+	}).resize(function(event){
 		sPosition = setSectionsPosition();
-		pageAnimation(sPosition);
+		fly = true;
+		pageAnimation(event, sPosition);
 	});
 }
 
@@ -263,6 +288,18 @@ function competencies(){
 // ====================================
 //                Skills
 // ====================================
+
+function animateSkillsSet(type){
+	var skills = $('.'+type+' .skill');
+	var counter = 0;
+	var time = 100;
+	var interval = setInterval(function(){
+		(counter < skills.length) ? 
+			$(skills[counter]).animate({opacity: 1, top: 0, left: 0}, time + 150) : 
+			clearInterval(interval);
+		counter++;
+	}, time);
+}
 
 function renderSkills(data, type){
 	var j = (type === 'front-end') ? 0 : frontEnd.length;
@@ -363,7 +400,7 @@ function formSubmission(event){
 		});
 		$form.trigger("reset");
 
-	} else showMessage("Your message can not be submitted<br>Make sure to enter a name and a vaild email");
+	} else showMessage("Your message can not be submitted<br>Please enter a name and a vaild email");
 
 	$inputs.prop("disabled", false);
 	event.preventDefault();
