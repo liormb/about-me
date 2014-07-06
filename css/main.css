@@ -533,7 +533,7 @@ header li.active a {
 }
 .contact .bird {
 	position: absolute;
-	left: 0;
+	left: -100px;
 	bottom: 70px;
 }
 

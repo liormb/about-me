@@ -1,4 +1,3 @@
-// Javascript
 
 // ====================================
 //               Variables
@@ -86,7 +85,8 @@ var projects = [
 
 var active;
 var preActive;
-var fly = true;
+var scrolls;
+var animated = {};
 
 // ====================================
 //       Extended Array Prototype
@@ -126,149 +126,6 @@ function scrollTo(event) {
 }
 
 // ====================================
-//          Scrolling Animation
-// ====================================
-
-// Description Animation
-function animateDescription(){
-	$('.description p').animate({opacity: 1, left: 0}, 1000, 'swing');
-	$('.description img').animate({opacity: 1, right: 0}, 1000, 'swing');
-}
-
-// About-Me Animation
-function animateBanner(){
-	$('.about-me-banner').delay(1000).animate({bottom: 0, opacity: 1}, 800, 'swing');
-}
-
-// Highlight the current active menu
-function animateMenu(active){
-	var nth;
-	switch(active){
-		case 'description' : 
-		case 'competencies': nth = 1; break;
-		case 'skills'      :
-		case 'education'   : nth = 2; break;
-		case 'portfolio'   : nth = 3; break;
-		case 'contact'     : nth = 4; break;
-		default            : nth = 1;
-	}
-	$('header li.active').removeClass('active');
-	$('header li:nth-child('+nth+')').addClass('active');
-}
-
-// Competencies animation (I-am/I-am-not)
-function animateCompetencies(){
-	$('.i-am-not h1 span').animate({fontSize: 65}, 650, function(){
-		$(this).animate({fontSize: 50}, 650);
-	});
-}
-
-// Skills animation
-function animateSkills(){
-	var opacity = parseInt($($('.skill')[0]).css('opacity'), 10);
-	if (!opacity){
-		animateSkillsSet('front-end');
-		animateSkillsSet('back-end');
-	}
-}
-
-// Education animation
-function animateEducation(){
-	var opacity = parseInt($($('.hu')).css('opacity'), 10);
-	if (!opacity)
-		$('.hu, .ga').animate({opacity: 1, top: 0, left: 0}, 800);
-}
-
-function animateContact(){
-	if (fly){
-		$('.bird').remove();
-		$('.contact').append('<img class="bird" src="assets/images/bird.gif" height="80">');
-		$('.bird').animate({bottom: 200, left: $(window).width()}, 10000, function(){
-			$(this).remove();
-			fly = false;
-		});
-	}
-}
-
-// Set all page section's top and bottom values
-function setSectionsPosition(){
-	var obj = {};
-	for (var i=0; i < sections.length; i++){
-		var top    = (i !== 0) ? $('.'+sections[i]).offset().top : 0;
-		var bottom = (i !== sections.length - 1) ? $('.'+sections[i+1]).offset().top - 1 : $(document).height();
-		obj[sections[i]] = { top: top, bottom: bottom };
-	}
-	return obj;
-}
-
-// Returns the current section presented on the page
-function getActiveSection(scroll, sections){
-	var offset = Math.floor($(window).height()/1.5);
-	for (var key in sections){
-		var section = sections[key];
-		if (section.top - offset <= scroll && section.bottom - offset >= scroll)
-			return key;
-	}
-	return false;
-}
-
-// Manage which animation to play
-function manageAnimation(key){
-	switch(key){
-		case 'competencies': animateCompetencies(); break;
-		case 'skills'      : animateSkills(); break;
-		case 'education'   : animateEducation(); break;
-		case 'contact'     : animateContact(); break;
-	}
-}
-
-// Page animation controller
-function pageAnimation(event, sPosition){
-	var event = event || window.event //for IE
-	event.preventDefault();
-	event.stopPropagation();
-
-	preActive = active || null;
-	var scroll = $(window).scrollTop();
-	active = getActiveSection(scroll, sPosition);
-
-	if (active !== preActive){
-		manageAnimation(active);
-		animateMenu(active);
-	}
-}
-
-// Handle page animation upon scrolling and resizing
-function pageAnimationEvents(sPosition){
-	$(window).scroll(function(event){
-		pageAnimation(event, sPosition);
-	}).resize(function(event){
-		sPosition = setSectionsPosition();
-		fly = true;
-		pageAnimation(event, sPosition);
-	});
-}
-
-// Fire when a page is loaded or refreshed
-function initPageAnimation(){
-	var sPosition = setSectionsPosition();
-	var height = $(window).height();
-	var scroll = $(window).scrollTop();
-	active = getActiveSection(scroll, sPosition);
-
-	animateMenu(active);
-	animateDescription();
-	animateBanner();
-
-	for (var key in sPosition){
-		var section = sPosition[key];
-		if (section.top < scroll + height && section.bottom > scroll)
-			manageAnimation(key);
-	}
-	pageAnimationEvents(sPosition);
-}
-
-// ====================================
 //    Competencies | I-Am & I-Am-Not
 // ====================================
 
@@ -288,18 +145,6 @@ function competencies(){
 // ====================================
 //                Skills
 // ====================================
-
-function animateSkillsSet(type){
-	var skills = $('.'+type+' .skill');
-	var counter = 0;
-	var time = 100;
-	var interval = setInterval(function(){
-		(counter < skills.length) ? 
-			$(skills[counter]).animate({opacity: 1, top: 0, left: 0}, time + 150) : 
-			clearInterval(interval);
-		counter++;
-	}, time);
-}
 
 function renderSkills(data, type){
 	var j = (type === 'front-end') ? 0 : frontEnd.length;
@@ -407,6 +252,151 @@ function formSubmission(event){
 }
 
 // ====================================
+//          Scrolling Animation
+// ====================================
+
+// Description Animation
+function animateDescription(){
+	$('.description p').animate({opacity: 1, left: 0}, 1000, 'swing');
+	$('.description img').animate({opacity: 1, right: 0}, 1000, 'swing');
+	animateBanner();
+}
+
+// About-Me Animation
+function animateBanner(){
+	$('.about-me-banner').delay(1000).animate({bottom: 0, opacity: 1}, 800, 'swing');
+}
+
+// Highlight the current active menu
+function animateMenu(active){
+	var nth;
+	switch(active){
+		case 'description' : 
+		case 'competencies': nth = 1; break;
+		case 'skills'      :
+		case 'education'   : nth = 2; break;
+		case 'portfolio'   : nth = 3; break;
+		case 'contact'     : nth = 4; break;
+		default            : nth = 1;
+	}
+	$('header li.active').removeClass('active');
+	$('header li:nth-child('+nth+')').addClass('active');
+}
+
+// Competencies animation (I-am/I-am-not)
+function animateCompetencies(){
+	$('.i-am-not h1 span').animate({fontSize: 65}, 650, function(){
+		$(this).animate({fontSize: 50}, 650);
+	});
+}
+
+// Skills animation
+function animateSkillsSet(type){
+	var skills = $('.'+type+' .skill');
+	var counter = 0;
+	var time = 100;
+	var interval = setInterval(function(){
+		(counter < skills.length) ? 
+			$(skills[counter]).animate({opacity: 1, top: 0, left: 0}, time + 150) : 
+			clearInterval(interval);
+		counter++;
+	}, time);
+}
+function animateSkills(){
+	animateSkillsSet('front-end');
+	animateSkillsSet('back-end');
+}
+
+// Education animation
+function animateEducation(){
+	$('.hu, .ga').animate({opacity: 1, top: 0, left: 0}, 800);
+}
+
+function animateContact(){
+	$('.bird').remove();
+	$('.contact').append('<img class="bird" src="assets/images/bird.gif" height="80">');
+	$('.bird').animate({bottom: 200, left: $(window).width()}, 10000, function(){
+		$(this).remove();
+	});
+}
+
+// Set all page section's top and bottom values
+function setSectionsPosition(){
+	var obj = {};
+	for (var i=0; i < sections.length; i++){
+		var top    = (i !== 0) ? $('.'+sections[i]).offset().top : 0;
+		var bottom = (i !== sections.length - 1) ? $('.'+sections[i+1]).offset().top - 1 : $(document).height();
+		obj[sections[i]] = { top: top, bottom: bottom };
+	}
+	return obj;
+}
+
+// Returns the current section presented on the page
+function getActiveSection(scroll, sections){
+	var offset = Math.floor($(window).height()/1.5);
+	for (var key in sections){
+		var section = sections[key];
+		if (section.top - offset <= scroll && section.bottom - offset >= scroll)
+			return key;
+	}
+	return false;
+}
+
+// Manage which animation to play
+function manageAnimation(sPosition){
+	var scroll = $(window).scrollTop();
+	var height = $(window).height();
+	var offset = 100;
+
+	active = getActiveSection(scroll, sPosition);
+
+	for (var key in sPosition){
+		var section = sPosition[key];
+		if (!animated[key] && section.top < scroll + height - offset && section.bottom > scroll + offset){
+			switch(key){
+				case 'description' : animateDescription();  break;
+				case 'competencies': animateCompetencies(); break;
+				case 'skills'      : animateSkills();       break;
+				case 'education'   : animateEducation();    break;
+				case 'contact'     : animateContact();      break;
+			}
+			animated[key] = true;
+		}
+	}
+}
+
+// Page animation controller
+function pageAnimation(event, sPosition){
+	var event = event || window.event //for IE
+	event.preventDefault();
+	event.stopPropagation();
+	preActive = active || null;
+	manageAnimation(sPosition);
+	if (active !== preActive) animateMenu(active);
+}
+
+// Handle page animation upon scrolling and resizing
+function pageAnimationEvents(sPosition){
+	$(window)
+		.scroll(function(event){
+		if ($(this).scrollTop() !== scrolls){
+			scrolls = $(this).scrollTop();
+			pageAnimation(event, sPosition);
+		}
+	}).resize(function(event){
+		sPosition = setSectionsPosition();
+	});
+}
+
+// Fire when a page is loaded or refreshed
+function initPageAnimation(){
+	var sPosition = setSectionsPosition();
+	manageAnimation(sPosition);
+	pageAnimationEvents(sPosition);
+	animateMenu(active);
+}
+
+// ====================================
 //            Handle Events
 // ====================================
 
@@ -420,12 +410,13 @@ function eventHandlers(){
 // ------------------------------------
 
 $(function() {
+	eventHandlers();
 	competencies();
 	skills();
 	portfolio();
 });
 
 $(window).load(function(){
-	eventHandlers();
+	scrolls = $(this).scrollTop();
 	initPageAnimation();
 });
