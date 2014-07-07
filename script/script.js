@@ -268,7 +268,7 @@ function animateBanner(){
 }
 
 // Highlight the current active menu
-function animateMenu(active){
+function animateMenu(){
 	var nth;
 	switch(active){
 		case 'description' : 
@@ -320,6 +320,17 @@ function animateContact(){
 	});
 }
 
+// Animate the up-arrow helper button
+function animateUpArrow(scroll){
+	if (!scroll && animated.arrow){
+		delete animated.arrow;
+		$('.up-arrow').animate({opacity: 0}, 300);
+	} else if (scroll && !animated.arrow){
+		animated.arrow = true;
+		$('.up-arrow').animate({opacity: 1}, 300);
+	}
+}
+
 // Set all page section's top and bottom values
 function setSectionsPosition(){
 	var obj = {};
@@ -342,13 +353,14 @@ function getActiveSection(scroll, sections){
 	return false;
 }
 
-// Manage which animation to play
+// Page animation controller
 function manageAnimation(sPosition){
 	var scroll = $(window).scrollTop();
 	var height = $(window).height();
 	var offset = 100;
 
 	active = getActiveSection(scroll, sPosition);
+	animateUpArrow(scroll);
 
 	for (var key in sPosition){
 		var section = sPosition[key];
@@ -365,23 +377,14 @@ function manageAnimation(sPosition){
 	}
 }
 
-// Page animation controller
-function pageAnimation(event, sPosition){
-	var event = event || window.event //for IE
-	event.preventDefault();
-	event.stopPropagation();
-	preActive = active || null;
-	manageAnimation(sPosition);
-	if (active !== preActive) animateMenu(active);
-}
-
 // Handle page animation upon scrolling and resizing
 function pageAnimationEvents(sPosition){
-	$(window)
-		.scroll(function(event){
+	$(window).scroll(function(event){
 		if ($(this).scrollTop() !== scrolls){
 			scrolls = $(this).scrollTop();
-			pageAnimation(event, sPosition);
+			preActive = active || null;
+			manageAnimation(sPosition);
+			if (active !== preActive) animateMenu();
 		}
 	}).resize(function(event){
 		sPosition = setSectionsPosition();
@@ -401,7 +404,7 @@ function initPageAnimation(){
 // ====================================
 
 function eventHandlers(){
-	$('.logo').on('click', scrollToTop);
+	$('.logo, .up-arrow').on('click', scrollToTop);
 	$('header nav a').on('click', scrollTo);
 	$('.sticky').sticky({ topSpacing: 0 });
 	$('#contact-form').submit(formSubmission);
