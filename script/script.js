@@ -285,7 +285,7 @@ function animateMenu(){
 
 // Competencies animation (I-am/I-am-not)
 function animateCompetencies(){
-	$('.i-am-not h1 span').animate({fontSize: 65}, 650, function(){
+	$('.i-am-not span').animate({fontSize: 65}, 650, function(){
 		$(this).animate({fontSize: 50}, 650);
 	});
 }
@@ -344,7 +344,7 @@ function setSectionsPosition(){
 
 // Returns the current section presented on the page
 function getActiveSection(scroll, sections){
-	var offset = Math.floor($(window).height()/1.5);
+	var offset = Math.floor($(window).height()/2);
 	for (var key in sections){
 		var section = sections[key];
 		if (section.top - offset <= scroll && section.bottom - offset >= scroll)
@@ -354,7 +354,11 @@ function getActiveSection(scroll, sections){
 }
 
 // Page animation controller
-function manageAnimation(sPosition){
+function manageAnimation(event, sPosition){
+	var event = event || window.event //for IE
+	event.preventDefault();
+	event.stopPropagation();
+
 	var scroll = $(window).scrollTop();
 	var height = $(window).height();
 	var offset = 100;
@@ -383,18 +387,21 @@ function pageAnimationEvents(sPosition){
 		if ($(this).scrollTop() !== scrolls){
 			scrolls = $(this).scrollTop();
 			preActive = active || null;
-			manageAnimation(sPosition);
+			manageAnimation(event, sPosition);
 			if (active !== preActive) animateMenu();
 		}
 	}).resize(function(event){
+		delete animated.contact;
 		sPosition = setSectionsPosition();
+		manageAnimation(event, sPosition);
+		animateMenu(active);
 	});
 }
 
 // Fire when a page is loaded or refreshed
-function initPageAnimation(){
+function initPageAnimation(event){
 	var sPosition = setSectionsPosition();
-	manageAnimation(sPosition);
+	manageAnimation(event, sPosition);
 	pageAnimationEvents(sPosition);
 	animateMenu(active);
 }
@@ -419,7 +426,7 @@ $(function() {
 	portfolio();
 });
 
-$(window).load(function(){
+$(window).load(function(event){
 	scrolls = $(this).scrollTop();
-	initPageAnimation();
+	initPageAnimation(event);
 });
