@@ -417,6 +417,24 @@ function eventHandlers(){
 	$('#contact-form').submit(formSubmission);
 }
 
+// ====================================
+//            iPhone View
+// ====================================
+
+function iPhoneView(){
+	$('.description').before('<section class="drop-menu gradient"></section>');
+	$drop = $('.drop-menu');
+	$menu = $('header nav').clone().removeClass('hidden-xs');
+
+	$('header').append('<button class="drop-menu-button">MENU</button>');
+	$drop.append($menu);
+
+	$('.drop-menu-button').on('click', function(event){
+		var height = ($drop.height()) ? 0 : 180;
+		$drop.animate({height: height}, 500, 'swing');
+	});
+}
+
 // ------------------------------------
 
 $(function() {
@@ -429,4 +447,5 @@ $(function() {
 $(window).load(function(event){
 	scrolls = $(this).scrollTop();
 	initPageAnimation(event);
+	//iPhoneView();
 });

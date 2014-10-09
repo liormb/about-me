@@ -783,3 +783,55 @@ a { outline: 0 !important; text-decoration: none !important; }
 @media screen and (-ms-high-contrast: active) and (max-width: 768px), (-ms-high-contrast: none) and (max-width: 768px) {
 	.description-container img { margin-top: -40px; margin-bottom: 60px; }
 }
+
+
+/*header .logo {
+	margin-top: 40px;
+	font-size: 32px;
+	line-height: 34px;
+	text-align: left;
+}
+.drop-menu {
+	position: relative;
+	height: 0;
+	width: 100%;
+	margin-left: 0;
+}
+.drop-menu ul {
+	padding-left: 0;
+}
+.drop-menu li {
+	text-transform: uppercase;
+	list-style-type: none;
+	margin: 0;
+	padding: 6px 0;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+}
+.drop-menu li:first-child {
+	padding-top: 30px;
+}
+.drop-menu li a {
+	color: rgb(80,80,80);
+}
+.drop-menu li:hover a {
+	color: #f47920;
+}
+.drop-menu-button {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 40px;
+	height: 40px;
+	border: none;
+	outline: none;
+	background: url(../assets/images/menu-icon.png) center center no-repeat;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  background-size: cover;
+	color: rgb(255,255,255);
+	text-indent: -9999px;
+}*/
