@@ -25,15 +25,15 @@ var iAmNot = [
 var frontEnd = [
 	{name: 'HTML5',         value: 95, color: ['#BEE3F7', '#45AEEA']},
 	{name: 'CSS3',          value: 95, color: ['#FCE6A4', '#EFB917']},
+	{name: 'SCSS',          value: 90, color: ['#D3B6C6', '#4B253A']},
 	{name: 'Bootstrap',     value: 85, color: ['#D3B6C6', '#4B253A']},
-	{name: 'JavaScript',    value: 85, color: ['#F8F9B6', '#D2D558']},
+	{name: 'JavaScript',    value: 95, color: ['#F8F9B6', '#D2D558']},
 	{name: 'jQuery',        value: 90, color: ['#F4BCBF', '#D43A43']},
-	{name: 'AJAX',          value: 90, color: ['#D3B6C6', '#4B253A']},
 	{name: 'd3.js',         value: 50, color: ['#FCE6A4', '#EFB917']},
 	{name: 'AngularJS',     value: 30, color: ['#D3B6C6', '#4B253A']},
 	{name: 'Backbone,js',   value: 85, color: ['#BEE3F7', '#45AEEA']},
-	{name: 'Underscore.js', value: 85, color: ['#F8F9B6', '#D2D558']},
-	{name: 'Handlebars.js', value: 85, color: ['#F4BCBF', '#D43A43']}
+	{name: 'Underscore.js', value: 90, color: ['#F8F9B6', '#D2D558']},
+	{name: 'React.js',      value: 90, color: ['#F4BCBF', '#D43A43']}
 ];
 
 var backEnd  = [
@@ -41,11 +41,11 @@ var backEnd  = [
 	{name: 'Rails',         value: 80, color: ['#FCE6A4', '#EFB917']},
 	{name: 'Sinatra',       value: 95, color: ['#BEE3F7', '#45AEEA']},
 	{name: 'PHP',           value: 50, color: ['#F8F9B6', '#D2D558']},
-	{name: 'CodeIgniter',   value: 70, color: ['#FCE6A4', '#EFB917']},
+	{name: 'Node',          value: 60, color: ['#FCE6A4', '#EFB917']},
 	{name: 'MySQL',         value: 65, color: ['#F8F9B6', '#D2D558']},
 	{name: 'PostgreSQL',    value: 90, color: ['#D3B6C6', '#4B253A']},
-	{name: 'RSpec',         value: 65, color: ['#F4BCBF', '#D43A43']},
-	{name: 'Capybara',      value: 60, color: ['#BEE3F7', '#45AEEA']}
+	{name: 'Capybara',      value: 60, color: ['#BEE3F7', '#45AEEA']},
+	{name: 'GraphQL',       value: 70, color: ['#F4BCBF', '#D43A43']}
 ];
 
 var projects = [
