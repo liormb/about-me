@@ -245,7 +245,7 @@ function formSubmission(event){
 		});
 		$form.trigger("reset");
 
-	} else showMessage("Your message can not be submitted<br>Please enter a name and a vaild email");
+	} else showMessage("Your message can not be submitted<br>Please enter a name and a valid email");
 
 	$inputs.prop("disabled", false);
 	event.preventDefault();
