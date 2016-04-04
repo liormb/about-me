@@ -742,7 +742,7 @@ a { outline: 0 !important; text-decoration: none !important; }
 	.competencies-container section { width: 100%; }
 	.i-am { padding-bottom: 10px !important; }
 	.i-am-not { padding-top: 0 !important; }
-	.competencies p { padding: 4px 10px; }
+	.competencies p { line-height: 42px; padding: 4px 10px; }
 	.project { width: 94%; margin: 1.5% 3%; }
 	.contact-container { padding-bottom: 150px; }
 	.contact h1 { text-align: center; font-size: 2em; }
